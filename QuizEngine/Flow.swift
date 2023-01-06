@@ -25,18 +25,12 @@ class Flow {
         if let firstQuestion = questions.first {
             router.routeTo(question: firstQuestion, answerCallback: nextCallback(from: firstQuestion))
         } else {
-            
+            router.routeTo(result: result)
         }
-        
-        router.routeTo(result: result)
     }
     
     private func nextCallback(from question: String) -> Router.AnswerCallback {
-        return { [weak self] answer in
-            if let self = self {
-                self.routeNext(question, answer)
-            }
-        }
+        return { [weak self] in self?.routeNext(question, $0) }
     }
     
     
