@@ -62,6 +62,12 @@ final class FlowTest: XCTestCase {
         XCTAssertEqual(router.routedResult!, [:])
     }
     
+    func test_withOneQuestion_doesNotrouteToResult() {
+        makeSUT(questions: ["Q1"]).start()
+        
+        XCTAssertNil(router.routedResult)
+    }
+    
     func test_startAndAnswerFirstAndSecondQuestion_withTwoQuestions_routesToResult() {
         let sut = makeSUT(questions: ["Q1", "Q2"])
         sut.start()
